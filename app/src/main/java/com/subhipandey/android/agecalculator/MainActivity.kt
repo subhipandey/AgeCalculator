@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import kotlinx.android.synthetic.main.content_main.*
+import java.text.SimpleDateFormat
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
@@ -13,16 +14,15 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        btnDatePicker.setOnClickListener {view ->
+        btnDatePicker.setOnClickListener { view ->
             clickDatePicker(view)
 
         }
 
 
-
     }
 
-    fun clickDatePicker(view: View){
+    fun clickDatePicker(view: View) {
 
         val myCalendar = Calendar.getInstance()
         val year = myCalendar.get(Calendar.YEAR)
@@ -31,12 +31,22 @@ class MainActivity : AppCompatActivity() {
 
 
         DatePickerDialog(this,
-            DatePickerDialog.OnDateSetListener{
-                view,year,month, dayOfMonth ->
+            DatePickerDialog.OnDateSetListener { view, selectedYear, selectedMonth, selectedDayOfMonth ->
+                Toast.makeText(
+                    this,
+                    "The chosen year is $selectedYear, month is $selectedMonth and the day is $selectedDayOfMonth",
+                    Toast.LENGTH_LONG
+                ).show()
 
-        }
-            ,year
-            ,month,
+                val selectedDate = "$selectedDayOfMonth/${selectedMonth + 1}/ $selectedYear"
+                tvSelectedDate.setText(selectedDate)
+
+                val sdf = SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH)
+
+                val theDate = sdf.parse(selectedDate)
+            }
+            , year
+            , month,
             day).show()
     }
 }
