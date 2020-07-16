@@ -7,4 +7,5 @@
     <color name="backgroundColor">#FEF1E0</color>
     <color name="ageTextBackgroundColor">#C846DCE0</color>
     <color name="ageTextColor">#FFFFFF</color>
+    <color name="lightGreyTextColor">#B7B7B7</color>
 </resources>
